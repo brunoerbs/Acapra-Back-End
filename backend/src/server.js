@@ -1,17 +1,18 @@
-import { createClient } from '@supabase/supabase-js'
-import 'dotenv/config'
+import Fastify from "fastify";
+import petsRoutes from "./routes/pets.js";
 
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseKey = process.env.SUPABASE_ANON_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
+const app = Fastify();
 
-async function testar() {
-  const { data, error } = await supabase.from('tb_pet').select('*').limit(1)
-  if (error) {
-    console.error('Erro Supabase:', error.message)
-  } else {
-    console.log('Deu certo! Dados:', data)
+app.register(petsRoutes, { prefix: "/pets" });
+
+const start = async () => {
+  try {
+    await app.listen({ port: 3000 });
+    console.log("Servidor http://localhost:3000");
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
   }
-}
+};
 
-testar()
+start();
