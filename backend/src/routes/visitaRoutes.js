@@ -1,6 +1,6 @@
 import { listarVisitas, retornarVisita, criarVisita, cancelarVisita, atualizarVisita } from "./visita.js"
 
-export default async function petsRoutes(app) {
+export default async function visitaRoutes(app) {
   app.get("/", listarVisitas)
   app.get("/:id", retornarVisita)
   app.post("/", criarVisita)
