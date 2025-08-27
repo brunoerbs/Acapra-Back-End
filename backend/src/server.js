@@ -1,18 +1,12 @@
-import Fastify from "fastify";
-import petsRoutes from "./routes/pets.js";
+import Fastify from "fastify"
+import petsRoutes from "./routes/petsRoutes.js"
 
-const app = Fastify();
+const app = Fastify()
 
-app.register(petsRoutes, { prefix: "/pets" });
+app.register(petsRoutes, { prefix: "/pets" })
 
-const start = async () => {
-  try {
-    await app.listen({ port: 3000 });
-    console.log("Servidor http://localhost:3000");
-  } catch (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
-};
+app.get("/", async () => {
+  return { status: "API online" }
+})
 
-start();
+app.listen({ port: 3001 })
