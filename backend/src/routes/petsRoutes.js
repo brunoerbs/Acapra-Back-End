@@ -1,8 +1,9 @@
-import { listarPets, criarPet, inativarPet, atualizarPetCompleto } from "./pets.js"
+import { listarPets, retornarPet, criarPet, inativarPet, atualizarPet } from "./pets.js"
 
 export default async function petsRoutes(app) {
   app.get("/", listarPets)
+  app.get("/retornarPet/:id_pet", retornarPet)
   app.post("/", criarPet)
   app.put("/:id", inativarPet)
-  app.put("/", atualizarPetCompleto)
+  app.put("/", atualizarPet)
 }

@@ -4,8 +4,7 @@ export async function listarDoencas(req, reply) {
     const { data, error } = await supabase
         .from('tb_doenca')
         .select('*')
-    //.eq('tb_pet_inativo', true)
-    if (error) return reply.code(500).send({ error: error.message })
+    if (error) return reply.code(500).send({ success: false, error: error.message })
     return { data }
 }
 
@@ -15,18 +14,25 @@ export async function retornarDoenca(req, reply) {
         .from('tb_doenca')
         .select('*')
         .eq('id_doenca', id)
-    if (error) return reply.code(500).send({ error: error.message })
+    if (error) return reply.code(500).send({ success: false, error: error.message })
     return { data }
 }
 // POST
 export async function criarDoenca(req, reply) {
-    const doenca = req.body
+    const doenca = {
+        ...req.body,
+        tb_doenca_inativo: false
+    }
     const { data, error } = await supabase
         .from('tb_doenca')
-        .insert([doenca])
+        .insert([doenca]).select();
 
-    if (error) return reply.code(500).send({ error: error.message })
-    return { message: "Doença criada com sucesso", data }
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+    return {
+        success: true,
+        data: data[0].id_doenca,
+        message: "Doença criada com sucesso."
+    }
 }
 // PUT
 export async function inativarDoenca(req, reply) {
@@ -37,8 +43,12 @@ export async function inativarDoenca(req, reply) {
         .update({ tb_doenca_inativo: false })
         .eq('id_doenca', id)
 
-    if (error) return reply.code(500).send({ error: error.message })
-    return { message: `Doença ${id} marcada como inativa`, data }
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+    return {
+        success: true,
+        data: data[0],
+        message: `Doença ${id} inativada.`
+    }
 }
 //PUT
 export async function atualizarDoencaCompleto(req, reply) {
@@ -55,7 +65,11 @@ export async function atualizarDoencaCompleto(req, reply) {
         .update(dadosParaAtualizar)
         .eq('id_doenca', id_doenca);
 
-    if (error) return reply.code(500).send({ error: error.message });
+    if (error) return reply.code(500).send({ success: false, error: error.message });
 
-    return { message: `Doença ${id_doenca} atualizada completamente`, data };
+    return {
+        success: true,
+        data: data[0],
+        message: `Doença ${id_doenca} atualizada.`
+    };
 }

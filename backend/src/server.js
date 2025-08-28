@@ -4,18 +4,18 @@ import visitaRoutes from "./routes/visitaRoutes.js"
 import usuarioRoutes from "./routes/usuarioRoutes.js"
 import racaRoutes from "./routes/racaRoutes.js"
 import fotoRoutes from "./routes/fotoRoutes.js"
-import vacinasRoutes from "./routes/vacinaRoutes.js";
+import vacinaRoutes from "./routes/vacinaRoutes.js";
 import doencaRoutes from "./routes/doencaRoutes.js"
 import historicoDoencaRoutes from "./routes/historicoDoencaRoutes.js"
 import historoVacinaRoutes from "./routes/historicoVacinaRoutes.js"
 
 const app = Fastify()
 
-app.register(petsRoutes, { prefix: "/pets" })
+app.register(petsRoutes, { prefix: "/pet" })
 app.register(visitaRoutes, { prefix: "/visita" })
 app.register(usuarioRoutes, { prefix: "/usuario" })
 app.register(fotoRoutes, { prefix: "/foto" })
-app.register(vacinasRoutes, { prefix: "/vacinas" });
+app.register(vacinaRoutes, { prefix: "/vacina" });
 app.register(doencaRoutes, { prefix: "/doenca" })
 app.register(racaRoutes, { prefix: "/raca" })
 app.register(historicoDoencaRoutes, {prefix:"/historicoDoenca"})
