@@ -5,7 +5,7 @@ export async function listarFotos(req, reply) {
   const { data, error } = await supabase
     .from('tb_foto_pet')
     .select('*')
-  if (error) return reply.code(500).send({ error: error.message })
+  if (error) return reply.code(500).send({ success: false, error: error.message })
   return { data }
 }
 
@@ -15,7 +15,7 @@ export async function retornarFoto(req, reply) {
     .from('tb_foto_pet')
     .select('*')
     .eq('id_foto_pet', id)
-  if (error) return reply.code(500).send({ error: error.message })
+  if (error) return reply.code(500).send({ success: false, error: error.message })
   return { data }
 }
 
@@ -25,7 +25,7 @@ export async function retornarFotosPorPet(req, reply) {
     .from('tb_foto_pet')
     .select('*')
     .eq('id_pet', id_pet)
-  if (error) return reply.code(500).send({ error: error.message })
+  if (error) return reply.code(500).send({ success: false, error: error.message })
   return { data }
 }
 
@@ -34,10 +34,12 @@ export async function criarFoto(req, reply) {
   const foto = req.body;
   const { data, error } = await supabase
     .from('tb_foto_pet')
-    .insert([foto])
+    .insert([foto]).select();
 
-  if (error) return reply.code(500).send({ error: error.message })
-  return { message: "Foto criada com sucesso", data }
+  if (error) return reply.code(500).send({ success: false, error: error.message })
+  return { success: true, 
+    data: data[0].id_foto, 
+    message: "Foto criada com sucesso" }
 }
 
 //PUT
@@ -55,7 +57,9 @@ export async function atualizarFoto(req, reply) {
     .update(dadosParaAtualizar)
     .eq('id_foto_pet', id_foto);
 
-  if (error) return reply.code(500).send({ error: error.message });
+  if (error) return reply.code(500).send({ success: false, error: error.message });
 
-  return { message: `Foto ${id_foto} atualizada`, data };
+  return { success: true, 
+    data: data[0], 
+    message: `Foto ${id_foto} atualizada.` };
 }

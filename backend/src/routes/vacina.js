@@ -10,15 +10,14 @@ export async function listarVacinas(req, reply) {
 }
 
 export async function criarVacina(req, reply) {
-  const { tb_vacina_nome, tb_vacina_data_vacina, tb_vacina_inativo } = req.body;
+  const { tb_vacina_nome, tb_vacina_data_vacina } = req.body;
 
   const { data, error } = await supabase
     .from("tb_vacina")
     .insert([
       {
         tb_vacina_nome,
-        tb_vacina_data_vacina,
-        tb_vacina_inativo
+        tb_vacina_data_vacina
       }
     ])
     .select(); 
