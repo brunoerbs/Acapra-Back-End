@@ -17,6 +17,7 @@ export async function retornarDoenca(req, reply) {
     if (error) return reply.code(500).send({ success: false, error: error.message })
     return { data }
 }
+
 // POST
 export async function criarDoenca(req, reply) {
     const doenca = {
@@ -25,7 +26,8 @@ export async function criarDoenca(req, reply) {
     }
     const { data, error } = await supabase
         .from('tb_doenca')
-        .insert([doenca]).select();
+        .insert([doenca])
+        .select();
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
     return {
@@ -51,7 +53,7 @@ export async function inativarDoenca(req, reply) {
     }
 }
 //PUT
-export async function atualizarDoencaCompleto(req, reply) {
+export async function atualizarDoenca(req, reply) {
     const doenca = req.body;
 
     if (!doenca.id_doenca) {

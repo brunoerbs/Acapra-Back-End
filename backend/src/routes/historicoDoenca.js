@@ -43,7 +43,7 @@ export async function criarHistoricoDoenca(req, reply) {
 
     return { 
       success: true, 
-      data: data[0], 
+      data: data[0].id_historico_doenca, 
       message: "Histórico criado com sucesso"
     }
   } catch (err) {
