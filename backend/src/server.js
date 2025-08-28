@@ -6,6 +6,8 @@ import racaRoutes from "./routes/racaRoutes.js"
 import fotoRoutes from "./routes/fotoRoutes.js"
 import vacinasRoutes from "./routes/vacinaRoutes.js";
 import doencaRoutes from "./routes/doencaRoutes.js"
+import historicoDoencaRoutes from "./routes/historicoDoencaRoutes.js"
+import historoVacinaRoutes from "./routes/historicoVacinaRoutes.js"
 
 const app = Fastify()
 
@@ -16,6 +18,8 @@ app.register(fotoRoutes, { prefix: "/foto" })
 app.register(vacinasRoutes, { prefix: "/vacinas" });
 app.register(doencaRoutes, { prefix: "/doenca" })
 app.register(racaRoutes, { prefix: "/raca" })
+app.register(historicoDoencaRoutes, {prefix:"/historicoDoenca"})
+app.register(historoVacinaRoutes,{prefix:"/historicoVacina"})
 
 app.get("/", async () => {
   return { status: "API online" }
