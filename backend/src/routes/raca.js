@@ -5,21 +5,39 @@ export async function listarRacas(req, reply) {
   const { data, error } = await supabase
     .from('tb_raca')
     .select('*')
-    //.eq('tb_raca_inativo', false) // se quiser filtrar só ativos
+  //.eq('tb_raca_inativo', false) // se quiser filtrar só ativos
 
-  if (error) return reply.code(500).send({ error: error.message })
+  if (error) return reply.code(500).send({ success: false, error: error.message })
   return { data }
+}
+
+export async function retornarRaca(req, reply) {
+    const { id } = req.params
+    const { data, error } = await supabase
+        .from('tb_raca')
+        .select('*')
+        .eq('id_raca', id)
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+    return { data }
 }
 
 // POST
 export async function criarRaca(req, reply) {
-  const raca = req.body  
+  const raca = {
+    ...req.body,
+    tb_raca_inativo: false
+  }
   const { data, error } = await supabase
     .from('tb_raca')
     .insert([raca])
+    .select();
 
-  if (error) return reply.code(500).send({ error: error.message })
-  return { message: "Raça criada com sucesso", data }
+  if (error) return reply.code(500).send({ success: false, error: error.message })
+  return {
+        success: true,
+        data: data[0].id_raca,
+        message: "Raça criada com sucesso."
+    }
 }
 
 // PUT - inativar
@@ -31,12 +49,16 @@ export async function inativarRaca(req, reply) {
     .update({ tb_raca_inativo: true }) // inativo = true
     .eq('id_raca', id)
 
-  if (error) return reply.code(500).send({ error: error.message })
-  return { message: `Raça ${id} marcada como inativa`, data }
+  if (error) return reply.code(500).send({ success: false, error: error.message })
+  return {
+        success: true,
+        data: data[0],
+        message: `Raça ${id} inativada.`
+    }
 }
 
 // PUT - atualizar completo
-export async function atualizarRacaCompleto(req, reply) {
+export async function atualizarRaca(req, reply) {
   const raca = req.body;
 
   if (!raca.id_raca) {
@@ -50,9 +72,13 @@ export async function atualizarRacaCompleto(req, reply) {
     .update(dadosParaAtualizar)
     .eq('id_raca', id_raca);
 
-  if (error) return reply.code(500).send({ error: error.message });
+  if (error) return reply.code(500).send({ success: false, error: error.message });
 
-  return { message: `Raça ${id_raca} atualizada completamente`, data };
+  return {
+        success: true,
+        data: data[0],
+        message: `Raça ${id_raca} atualizada.`
+    };
 }
 
 

@@ -9,6 +9,16 @@ export async function listarVacinas(req, reply) {
     };
 }
 
+export async function retornarVacina(req, reply) {
+    const { id } = req.params
+    const { data, error } = await supabase
+        .from('tb_vacina')
+        .select('*')
+        .eq('id_vacina', id)
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+    return { data }
+}
+
 export async function criarVacina(req, reply) {
   const { tb_vacina_nome, tb_vacina_data_vacina } = req.body;
 
@@ -25,7 +35,7 @@ export async function criarVacina(req, reply) {
 
   return { 
     success: true, 
-    data: data[0], 
+    data: data[0].id_vacina, 
     message: "Vacina criada com sucesso"
   };
 }
