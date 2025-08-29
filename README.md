@@ -117,7 +117,8 @@ http://localhost:3001
 ---
 
 ## 📌 Observações
-- Todas as rotas retornam **JSON**.  
+- Todas as rotas retornam **JSON**.
+- Para fins de testes, foi anexado no repositório um arquivo postman com todas as rotas já prontas para teste.
 - Alguns endpoints ainda não têm exemplos de respostas configurados no Postman.
 - A API se comunica com um banco na nuvem alocado no supabase. Para ter acesso, precisaremos adicionar seu email como perfil de administrador manualmente na plataforma.
 - Todos os usuários atuais da base possuem a senha 1234 
