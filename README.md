@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/22053512/README.md)
 # 📌 API Acapra - Documentação
 
 API desenvolvida em **Node.js + Fastify** para gerenciar informações de pets, usuários, visitas, adoções, vacinas e doenças.
