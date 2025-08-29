@@ -1,0 +1,1451 @@
+{
+	"info": {
+		"_postman_id": "668664dd-61ca-4899-b2f2-9d4eb4452ac4",
+		"name": "Curricularização - Backend sistema acapra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30396072"
+	},
+	"item": [
+		{
+			"name": "Visitas",
+			"item": [
+				{
+					"name": "ListarVisitas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/visita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"visita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarVisita",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/visita/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"visita",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AgendarVisita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tb_agenda_visita_data_visita\": \"2025-11-12\",\r\n    \"tb_agenda_visita_observacoes\": \"Visita normal\",\r\n    \"id_pet\": 1,\r\n    \"id_usuario\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/visita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"visita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CancelarVisita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/visita/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"visita",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarVisita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_agenda_visita\": 3,\r\n    \"tb_agenda_visita_data_visita\": \"2025-10-30\",\r\n    \"tb_agenda_visita_observacoes\": \"Pessoa vem para olhar e decidir se quer adotar ou não\",\r\n    \"id_pet\": 2,\r\n    \"id_usuario\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/visita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"visita"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pets",
+			"item": [
+				{
+					"name": "ListarPets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/pet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarPet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/pet/retornarPet/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"pet",
+								"retornarPet",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarPet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"tb_pet_nome\": \"Duque\",\r\n            \"tb_pet_data_nascimento\": \"2023-02-05\",\r\n            \"tb_pet_porte\": 2,\r\n            \"tb_especie\": 1,\r\n            \"tb_pet_genero\": 1,\r\n            \"id_raca\": 1\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/pet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InativarPet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/pet/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"pet",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarPet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_pet\": 6,\r\n    \"tb_pet_nome\": \"Duque\",\r\n    \"tb_pet_data_nascimento\": \"2023-02-05\",\r\n    \"tb_pet_porte\": 2,\r\n    \"tb_especie\": 1,\r\n    \"tb_pet_genero\": 1,\r\n    \"id_raca\": 1,\r\n    \"tb_pet_inativo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/pet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fotos",
+			"item": [
+				{
+					"name": "ListarFotos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/foto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarFoto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/foto/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foto",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarFoto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/foto/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foto",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarFotosPorPet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/foto/retornarFotosPorPet/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foto",
+								"retornarFotosPorPet",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarFoto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Anexo",
+								"value": "application/octet-stream",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tb_foto_pet_url_foto\": \"https://img.freepik.com/fotos-gratis/adoravel-cachorro-basenji-marrom-e-branco-sorrindo-e-dando-mais-uns-cinco-isolado-no-branco_346278-1657.jpg?semt=ais_hybrid&w=740&q=80\",\r\n    \"id_pet\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/foto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarFoto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_agenda_visita\": 3,\r\n    \"tb_agenda_visita_data_visita\": \"2025-10-30\",\r\n    \"tb_agenda_visita_observacoes\": \"Pessoa vem para olhar e decidir se quer adotar ou não\",\r\n    \"id_pet\": 2,\r\n    \"id_usuario\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/foto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"foto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "ListarUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "email",
+								"value": "gui@gui.com",
+								"type": "text"
+							},
+							{
+								"key": "senha",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/usuario/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarUsuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/usuario/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"usuario",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tb_usuario_nome\": \"teste senha\",\r\n    \"tb_usuario_email\": \"gui@gui.com\",\r\n    \"tb_usuario_senha\": \"1234\",\r\n    \"tb_usuario_telefone\": 47988857537,\r\n    \"tb_usuario_data_nascimento\": \"2001-05-14\",\r\n    \"tb_usuario_data_cadastro\": \"2025-08-27\",\r\n    \"tb_usuario_rua\": \"Ministro Lindolfo Collor\",\r\n    \"tb_usuario_numero\": 215,\r\n    \"tb_usuario_cidade\": \"Brusque\",\r\n    \"tb_usuario_estado\": \"SC\",\r\n    \"tb_usuario_cep\": 88353370,\r\n    \"tb_usuario_bairro\": \"Primeiro de Maio\",\r\n    \"tb_usuario_complemento\": \"última casa do morro a esquerda\",\r\n    \"tb_usuario_admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InativarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/usuario/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"usuario",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_usuario\": 2,\r\n    \"tb_usuario_nome\": \"Guilherme Felipe da Silva\",\r\n    \"tb_usuario_email\": \"gui@gui.com\",\r\n    \"tb_usuario_senha\": \"1234\",\r\n    \"tb_usuario_telefone\": 47988857537,\r\n    \"tb_usuario_data_nascimento\": \"2001-05-14T00:00:00\",\r\n    \"tb_usuario_data_cadastro\": \"2025-08-27\",\r\n    \"tb_usuario_rua\": \"Ministro Lindolfo Collor\",\r\n    \"tb_usuario_numero\": 215,\r\n    \"tb_usuario_cidade\": \"Brusque\",\r\n    \"tb_usuario_estado\": \"SC\",\r\n    \"tb_usuario_cep\": 88353370,\r\n    \"tb_usuario_bairro\": \"Primeiro de Maio\",\r\n    \"tb_usuario_complemento\": \"última casa do morro à esquerda\",\r\n    \"tb_usuario_admin\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vacina",
+			"item": [
+				{
+					"name": "ListarVacinas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/vacina",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"vacina"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "CriarVacina",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tb_vacina_nome\": \"Tétano\",\n    \"tb_vacina_data_vacina\": \"2027-07-05\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/vacina",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"vacina"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarVacina",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tb_vacina_nome\": \"Peste Negra\",\n    \"tb_vacina_data_vacina\": \"2025-08-30\",\n    \"tb_vacina_inativo\": false\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/vacinas/atualizarVacina?id_vacina=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"vacinas",
+								"atualizarVacina"
+							],
+							"query": [
+								{
+									"key": "id_vacina",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarVacina",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/vacinas/inativarVacina?id_vacina=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"vacinas",
+								"inativarVacina"
+							],
+							"query": [
+								{
+									"key": "id_vacina",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarVacina",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/vacina/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"vacina",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doenca",
+			"item": [
+				{
+					"name": "ListarDoencas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/doenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"doenca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarDoenca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tb_doenca_nome\":\"qualquer uma\",\r\n    \"tb_doenca_descricao\": \"A parvovirose é uma doença causada por um vírus que ataca o aparelho digestivo e o sistema imunológico dos cães, principalmente em filhotes. Sua transmissão se dá pelo contato direto com as fezes de animais doentes.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/doenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"doenca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InativarDoenca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/doenca/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"doenca",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarDoenca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_doenca\": 8,\r\n    \"tb_doenca_nome\": \"Hepatite Infecciosa Canina\",\r\n    \"tb_doenca_descricao\": \"A hepatite infecciosa canina é uma doença aguda que acomete o fígado, causada por um vírus agressivo, transmitida pelas descargas orais e nasais, fezes e pelo contato com o ambiente. Tem uma rápida evolução, podendo levar a óbito em 24 horas. Filhotes não vacinados podem ter morte súbita.\",\r\n    \"tb_doenca_inativo\": \"True\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/doenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"doenca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarDoenca",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/doenca/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"doenca",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Raca",
+			"item": [
+				{
+					"name": "ListarRacas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/raca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"raca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarRaca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tb_doenca_nome\":\"qualquer uma\",\r\n    \"tb_doenca_descricao\": \"A parvovirose é uma doença causada por um vírus que ataca o aparelho digestivo e o sistema imunológico dos cães, principalmente em filhotes. Sua transmissão se dá pelo contato direto com as fezes de animais doentes.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/raca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"raca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InativarRaca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/raca/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"raca",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarRaca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_doenca\": 8,\r\n    \"tb_doenca_nome\": \"Hepatite Infecciosa Canina\",\r\n    \"tb_doenca_descricao\": \"A hepatite infecciosa canina é uma doença aguda que acomete o fígado, causada por um vírus agressivo, transmitida pelas descargas orais e nasais, fezes e pelo contato com o ambiente. Tem uma rápida evolução, podendo levar a óbito em 24 horas. Filhotes não vacinados podem ter morte súbita.\",\r\n    \"tb_doenca_inativo\": \"True\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/raca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"raca"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HistoricoVacinas",
+			"item": [
+				{
+					"name": "ListarHistoricoVacina",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tb_vacina_nome\": \"Vacina da Febre Amarela\",\n    \"tb_vacina_data_vacina\": \"2025-08-26\",\n    \"tb_vacina_inativo\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoVacina/listarHistoricoVacina?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoVacina",
+								"listarHistoricoVacina"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarHistoricoVacina",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_pet\": 4,\n    \"id_vacina\": 1,\n    \"tb_his_vacina_proxima_aplicacao\": \"2025-10-23\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoVacina/criarHistoricoVacina",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoVacina",
+								"criarHistoricoVacina"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarHistoricoVacina",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_his_vacina\": 1,\n    \"tb_his_vacina_proxima_aplicacao\": \"2025-11-01\",\n    \"tb_his_vacina_inativo\": false\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoVacina/atualizarHistoricoVacina",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoVacina",
+								"atualizarHistoricoVacina"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HistoricoDoenca",
+			"item": [
+				{
+					"name": "AtualizarHistoricoDoenca",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_historico_doenca\": 1,\n    \"tb_historico_doenca_status\": \"Completo\",\n    \"id_pet\":4,\n    \"id_doenca\": 2\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoDoenca/atualizarHistoricoDoenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoDoenca",
+								"atualizarHistoricoDoenca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarHistoricoDoenca",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tb_historico_doenca_status\": \"Pausado\",\n    \"id_pet\": 4,\n    \"id_doenca\": 1\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoDoenca/criarHistoricoDoenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoDoenca",
+								"criarHistoricoDoenca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarHistoricoDoenca",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/historicoDoenca/listarHistoricoDoenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoDoenca",
+								"listarHistoricoDoenca"
+							],
+							"query": [
+								{
+									"key": "id_historico_doenca",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "id_pet",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "id_doenca",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HistoricoAdocao",
+			"item": [
+				{
+					"name": "atualizarHistoricoAdocao",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_historico_doenca\": 1,\n    \"tb_historico_doenca_status\": \"Completo\",\n    \"id_pet\":4,\n    \"id_doenca\": 2\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoDoenca/atualizarHistoricoDoenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoDoenca",
+								"atualizarHistoricoDoenca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "criarHistoricoAdocao",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tb_historico_doenca_status\": \"Pausado\",\n    \"id_pet\": 4,\n    \"id_doenca\": 1\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/historicoAdocao/criarHistoricoAdocao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoAdocao",
+								"criarHistoricoAdocao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarHistoricoAdocao",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/historicoDoenca/listarHistoricoDoenca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"historicoDoenca",
+								"listarHistoricoDoenca"
+							],
+							"query": [
+								{
+									"key": "id_historico_doenca",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "id_pet",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "id_doenca",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Adocao",
+			"item": [
+				{
+					"name": "ListarAdocoesUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/adocao/listarAdocoesPorUsuario/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"adocao",
+								"listarAdocoesPorUsuario",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CriarAdocao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_pet\": 2, \r\n    \"id_usuario\": 5, \r\n    \"tb_adocao_data_adocao\": \"2025-08-28\", \r\n    \"tb_adocao_qtd_pessoas\": 4,\r\n    \"tb_adocao_ha_criancas\": \"TRUE\", \r\n    \"tb_adocao_idades_criancas\": \"6\", \r\n    \"tb_adocao_todos_concordam\": \"TRUE\", \r\n    \"tb_adocao_alguem_alergia\": \"FALSE\", \r\n    \"tb_adocao_ja_possuiu_animais\": \"TRUE\", \r\n    \"tb_adocao_quais_animais\": \"Cachorro, Gato\", \r\n    \"tb_adocao_destino_animais_anteriores\": \"Doação\",  \r\n    \"tb_adocao_residencia\": \"Aluguel\", \r\n    \"tb_adocao_possui_espaco_externo\": \"FALSE\", \r\n    \"tb_adocao_local_animal\": \"Casa\", \r\n    \"tb_adocao_motivo_adocao\": \"Cachorro de porte grande\", \r\n    \"tb_adocao_responsavel_cuidados\": \"Luiz Guilherme\", \r\n    \"tb_adocao_tempo_sozinho\": \"2 horas\", \r\n    \"tb_adocao_ciente_custos\": \"TRUE\", \r\n    \"tb_adocao_disposto_veterinario\": \"TRUE\", \r\n    \"tb_adocao_compromisso_vida\": \"SIM\",\r\n    \"tb_adocao_inativo\": \"TRUE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/adocao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"adocao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InativarAdocao",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_pet\": 2,\r\n  \"id_usuario\": 5,\r\n  \"tb_adocao_data_adocao\": \"2025-08-28\",\r\n  \"tb_adocao_qtd_pessoas\": 4,\r\n  \"tb_adocao_ha_criancas\": false,\r\n  \"tb_adocao_idades_criancas\": 11,\r\n  \"tb_adocao_todos_concordam\": true,\r\n  \"tb_adocao_alguem_alergia\": false,\r\n  \"tb_adocao_quais_animais\": \"Cachorro, Gato\",\r\n  \"tb_adocao_destino_animais_anteriores\": \"Doação\",\r\n  \"tb_adocao_residencia\": \"Aluguel\",\r\n  \"tb_adocao_possui_espaco_externo\": false,\r\n  \"tb_adocao_local_animal\": \"Sala\",\r\n  \"tb_adocao_motivo_adocao\": \"Companhia\",\r\n  \"tb_adocao_responsavel_cuidados\": \"João da Silva\",\r\n  \"tb_adocao_tempo_sozinho\": \"4 horas\",\r\n  \"tb_adocao_ciente_custos\": true,\r\n  \"tb_adocao_disposto_veterinario\": true,\r\n  \"tb_adocao_compromisso_vida\": \"Sim\",\r\n  \"tb_adocao_ja_possuiu_animais\": true,\r\n  \"tb_adocao_inativo\": false\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/adocao/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"adocao",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarAdocao",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_adocao\": 6,\r\n  \"id_pet\": 1,\r\n  \"tb_adocao_data_adocao\": \"2025-08-28\",\r\n  \"tb_adocao_qtd_pessoas\": 4,\r\n  \"tb_adocao_ha_criancas\": false,\r\n  \"tb_adocao_idades_criancas\": 11,\r\n  \"tb_adocao_todos_concordam\": true,\r\n  \"tb_adocao_alguem_alergia\": false,\r\n  \"tb_adocao_quais_animais\": \"Cachorro, Gato\",\r\n  \"tb_adocao_destino_animais_anteriores\": \"Doação\",\r\n  \"tb_adocao_residencia\": \"Aluguel\",\r\n  \"tb_adocao_possui_espaco_externo\": false,\r\n  \"tb_adocao_local_animal\": \"Sala\",\r\n  \"tb_adocao_motivo_adocao\": \"Companhia\",\r\n  \"tb_adocao_responsavel_cuidados\": \"João da Silva\",\r\n  \"tb_adocao_tempo_sozinho\": \"4 horas\",\r\n  \"tb_adocao_ciente_custos\": true,\r\n  \"tb_adocao_disposto_veterinario\": true,\r\n  \"tb_adocao_compromisso_vida\": \"Sim\",\r\n  \"tb_adocao_ja_possuiu_animais\": true,\r\n  \"tb_adocao_inativo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/adocao/atualizarAdocao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"adocao",
+								"atualizarAdocao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarAdocoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/adocao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"adocao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RetornarAdocao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/adocao/retornarAdocao/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"adocao",
+								"retornarAdocao",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
