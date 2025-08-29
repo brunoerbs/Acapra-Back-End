@@ -63,3 +63,14 @@ export async function atualizarFoto(req, reply) {
     data: data[0], 
     message: `Foto ${id_foto} atualizada.` };
 }
+
+export async function deletarFoto(req, reply) {
+  const { id } = req.params
+  const { error } = await supabase
+    .from('tb_foto_pet')
+    .delete()
+    .eq('id_foto_pet', id)
+  if (error) return reply.code(500).send({ success: false, error: error.message })
+  return { success: true, 
+    message: `Foto ${id} deletada.` };
+}

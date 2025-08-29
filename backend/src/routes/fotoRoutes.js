@@ -1,4 +1,4 @@
-import { listarFotos, retornarFoto, retornarFotosPorPet, criarFoto, atualizarFoto } from "./foto.js"
+import { listarFotos, retornarFoto, retornarFotosPorPet, criarFoto, atualizarFoto, deletarFoto } from "./foto.js"
 
 export default async function fotoRoutes(app) {
   app.get("/", listarFotos)
@@ -6,4 +6,5 @@ export default async function fotoRoutes(app) {
   app.get("/retornarFotosPorPet/:id_pet", retornarFotosPorPet)
   app.post("/", criarFoto)
   app.put("/", atualizarFoto)
+  app.delete("/:id", deletarFoto)
 }

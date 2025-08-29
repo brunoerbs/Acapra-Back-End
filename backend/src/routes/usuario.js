@@ -23,7 +23,7 @@ export async function login(req, reply) {
   const { email, senha } = req.headers;
   const { data, error } = await supabase
     .from('tb_usuario')
-    .select('*')
+    .select('id_usuario, tb_usuario_email, tb_usuario_senha, tb_usuario_nome, tb_usuario_admin')
     .eq('tb_usuario_email', email)
     .eq('tb_usuario_senha', senha)
   if (error) return reply.code(500).send({ error: error.message })
