@@ -1,4 +1,5 @@
 import Fastify from "fastify"
+import cors from "@fastify/cors"
 import petsRoutes from "./routes/petsRoutes.js"
 import visitaRoutes from "./routes/visitaRoutes.js"
 import usuarioRoutes from "./routes/usuarioRoutes.js"
@@ -11,6 +12,13 @@ import historoVacinaRoutes from "./routes/historicoVacinaRoutes.js"
 import adocaoRoutes from "./routes/adocaoRoutes.js"
 
 const app = Fastify()
+
+// Habilita CORS para qualquer origem
+app.register(cors, {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+})
 
 app.register(petsRoutes, { prefix: "/pet" })
 app.register(visitaRoutes, { prefix: "/visita" })

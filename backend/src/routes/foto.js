@@ -38,30 +38,30 @@ export async function criarFoto(req, reply) {
 
   if (error) return reply.code(500).send({ success: false, error: error.message })
   return { success: true, 
-    data: data[0].id_foto, 
+    data: data[0].id_foto_pet, 
     message: "Foto criada com sucesso" }
 }
 
 //PUT
 export async function atualizarFoto(req, reply) {
-  const visita = req.body;
+  const foto = req.body;
 
-  if (!visita.id_foto) {
+  if (!foto.id_foto_pet) {
     return reply.code(400).send({ error: "O campo 'id_foto_pet' é obrigatório" });
   }
 
-  const { id_foto, ...dadosParaAtualizar } = visita;
+  const { id_foto_pet, ...dadosParaAtualizar } = foto;
 
   const { data, error } = await supabase
     .from('tb_foto_pet')
     .update(dadosParaAtualizar)
-    .eq('id_foto_pet', id_foto);
+    .eq('id_foto_pet', id_foto_pet);
 
   if (error) return reply.code(500).send({ success: false, error: error.message });
 
   return { success: true, 
     data: data[0], 
-    message: `Foto ${id_foto} atualizada.` };
+    message: `Foto ${id_foto_pet} atualizada.` };
 }
 
 export async function deletarFoto(req, reply) {

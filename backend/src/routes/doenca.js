@@ -42,7 +42,7 @@ export async function inativarDoenca(req, reply) {
 
     const { data, error } = await supabase
         .from('tb_doenca')
-        .update({ tb_doenca_inativo: false })
+        .update({ tb_doenca_inativo: true })
         .eq('id_doenca', id)
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
