@@ -25,7 +25,7 @@ export async function criarPet(req, reply) {
     ...req.body,
     tb_pet_inativo: false,
     tb_pet_status_pet: 1,
-    tb_pet_adotado: 0
+    tb_pet_adotado: false
   }
   const { data, error } = await supabase
     .from('tb_pet')

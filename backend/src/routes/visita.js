@@ -23,12 +23,17 @@ export async function retornarVisita(req, reply) {
 export async function criarVisita(req, reply) {
   const visita = {
     ...req.body,
+    // Default para id_usuario deve ser null (não 0)
+    id_usuario: (req.body?.id_usuario && Number(req.body.id_usuario) > 0)
+      ? Number(req.body.id_usuario)
+      : null,
     tb_agenda_visita_inativo: false
   }
+  console.log('visita', visita)
   const { data, error } = await supabase
     .from('tb_agenda_visita')
     .insert([visita]).select();
-
+console.log('error', error)
   if (error) return reply.code(500).send({ success: false, error: error.message })
   return { success: true, 
     data: data[0].id_agenda_visita, 

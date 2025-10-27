@@ -42,7 +42,7 @@ export async function criarVacina(req, reply) {
 
 export async function atualizarVacina(req, reply) {
   const { id_vacina } = req.query; 
-  const { tb_vacina_nome, tb_vacina_data_vacina, tb_vacina_inativo } = req.body;
+  const { tb_vacina_nome, tb_vacina_data_vacina } = req.body;
 
   if (!id_vacina) {
     return reply.code(400).send({ success: false, message: "id_vacina é obrigatório" });
@@ -51,7 +51,7 @@ export async function atualizarVacina(req, reply) {
   try {
     const { data, error } = await supabase
       .from("tb_vacina")
-      .update({ tb_vacina_nome, tb_vacina_data_vacina, tb_vacina_inativo })
+      .update({ tb_vacina_nome, tb_vacina_data_vacina })
       .eq("id_vacina", id_vacina)
       .select();
 
@@ -70,15 +70,16 @@ export async function atualizarVacina(req, reply) {
 }
 
 export async function inativarVacina(req, reply) {
-  const { id_vacina } = req.params
-
+  const { id } = req.params
+  // A tabela tb_vacina não possui campo de inativação no schema.
+  // Optamos por remover o registro para manter consistência.
   const { data, error } = await supabase
     .from('tb_vacina')
-    .update({ tb_vacina_inativo: true }) 
-    .eq('id_vacina', id_vacina)
+    .delete()
+    .eq('id_vacina', id)
 
   if (error) return reply.code(500).send({ error: error.message })
-  return { message: `Vacina ${id_vacina} marcada como inativa`, data }
+  return { message: `Vacina ${id} removida`, data }
 }
 
 
