@@ -21,7 +21,7 @@ export async function retornarUsuario(req, reply) {
 }
 
 export async function login(req, reply) {
-  const { email, senha } = req.headers;
+  const { email, senha } = req.query;
   const { data, error } = await supabase
     .from('tb_usuario')
     .select('id_usuario, tb_usuario_email, tb_usuario_senha, tb_usuario_nome, tb_usuario_admin')
@@ -39,6 +39,7 @@ export async function login(req, reply) {
   const usuarioRetorno = {
     id: usuario.id_usuario,
     nome: usuario.tb_usuario_nome,
+    email: usuario.tb_usuario_email,
     admin: usuario.tb_usuario_admin
   }
 
