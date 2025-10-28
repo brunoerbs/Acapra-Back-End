@@ -27,6 +27,7 @@ export async function criarPet(req, reply) {
     tb_pet_status_pet: 1,
     tb_pet_adotado: false
   }
+  console.log('pet', pet)
   const { data, error } = await supabase
     .from('tb_pet')
     .insert([pet]).select();
