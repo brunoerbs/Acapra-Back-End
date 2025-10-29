@@ -38,7 +38,6 @@ export async function listarHistoricoVacinaPorPet(req, reply) {
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
 
-    // Enriquecer com o nome da vacina (tb_vacina_nome)
     const idsVacina = Array.from(new Set((data || [])
       .map((h) => h?.id_vacina)
       .filter((v) => v !== null && v !== undefined)))
@@ -75,7 +74,6 @@ export async function criarHistoricoVacina(req, reply) {
       return reply.code(400).send({ success: false, error: "Campos obrigatórios: id_pet, id_vacina" })
     }
 
-    // data atual se não enviada
     hisVacina.tb_his_vacina_data_aplicacao = new Date().toISOString().split('T')[0]
     if (hisVacina.tb_his_vacina_inativo === undefined) hisVacina.tb_his_vacina_inativo = false
 
@@ -107,7 +105,6 @@ export async function atualizarHistoricoVacina(req, reply) {
 
     const { id_his_vacina, tb_his_vacina_data_aplicacao, ...dadosParaAtualizar } = hisVacina
 
-    // busca a data antiga caso não venha no body
     const { data: existingData, error: fetchError } = await supabase
       .from('tb_his_vacina')
       .select('tb_his_vacina_data_aplicacao')
