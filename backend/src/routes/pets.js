@@ -67,6 +67,31 @@ export async function listarPets(req, reply) {
     const { data, error } = await query
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
+
+    // Enriquecer com o nome da raça (tb_raca_nome) mantendo o id_raca
+    const idsRaca = Array.from(new Set((data || [])
+      .map((p) => p?.id_raca)
+      .filter((v) => v !== null && v !== undefined)))
+
+    if (idsRaca.length > 0) {
+      const { data: racas, error: racaError } = await supabase
+        .from('tb_raca')
+        .select('id_raca, tb_raca_nome_raca')
+        .in('id_raca', idsRaca)
+
+      if (racaError) return reply.code(500).send({ success: false, error: racaError.message })
+
+      const racaMap = new Map((racas || []).map((r) => [r.id_raca, r.tb_raca_nome_raca]))
+      const dataComRaca = (data || []).map((p) => ({
+        ...p,
+        tb_raca_nome_raca: racaMap.get(p.id_raca) ?? null,
+      }))
+
+      console.log('dataComRaca', dataComRaca)
+
+      return { data: dataComRaca }
+    }
+
     return { data }
   } catch (err) {
     return reply.code(500).send({ success: false, error: err?.message || 'Erro ao listar pets' })
