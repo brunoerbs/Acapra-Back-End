@@ -4,7 +4,6 @@ import { supabase } from '../lib/supabaseClient.js'
 export async function listarPets(req, reply) {
   try {
     const q = req.query || {}
-    // Normaliza chaves: remove acentos e coloca em minúsculo
     const normalize = (s) => (s ?? '')
       .toString()
       .normalize('NFD')
@@ -59,7 +58,6 @@ export async function listarPets(req, reply) {
         const lower = new Date(now)
         lower.setFullYear(now.getFullYear() - (idadeNum + 1))
         const toISO = (d) => d.toISOString().slice(0, 10)
-        // Nascidos até upper (<=) e após lower (>)
         query = query.lte('tb_pet_data_nascimento', toISO(upper)).gt('tb_pet_data_nascimento', toISO(lower))
       }
     }
@@ -68,7 +66,6 @@ export async function listarPets(req, reply) {
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
 
-    // Enriquecer com o nome da raça (tb_raca_nome) mantendo o id_raca
     const idsRaca = Array.from(new Set((data || [])
       .map((p) => p?.id_raca)
       .filter((v) => v !== null && v !== undefined)))
@@ -108,7 +105,6 @@ export async function retornarPet(req, reply) {
 
 // POST
 export async function criarPet(req, reply) {
-  // Aceita os campos: tb_foto_pet_url_foto (URL ou base64), anexo, foto
   const { tb_foto_pet_url_foto, anexo, foto, ...restoPet } = req.body ?? {}
 
   const pet = {
@@ -173,7 +169,6 @@ export async function atualizarPet(req, reply) {
     return reply.code(400).send({ error: "O campo 'id_pet' é obrigatório." });
   }
 
-  // Se vier anexo junto na atualização, captura e retira do objeto de atualização do pet
   const { tb_foto_pet_url_foto, anexo, foto, id_pet, ...dadosParaAtualizar } = body;
 
   const { data, error } = await supabase
@@ -184,7 +179,6 @@ export async function atualizarPet(req, reply) {
 
   if (error) return reply.code(500).send({ success: false, error: error.message });
 
-  // Se veio algum anexo, insere um novo registro de foto vinculado ao pet
   const anexoValor = tb_foto_pet_url_foto ?? foto ?? anexo
   if (anexoValor) {
     const fotoRegistro = {

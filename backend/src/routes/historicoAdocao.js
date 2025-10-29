@@ -38,7 +38,6 @@ export async function listarHistoricoAdocaoPorPet(req, reply) {
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
 
-    // Enriquecer com o nome do usuário (tb_usuario_nome)
     const idsUsuario = Array.from(new Set((data || [])
       .map((h) => h?.id_usuario)
       .filter((v) => v !== null && v !== undefined)))
@@ -78,7 +77,6 @@ export async function criarHistoricoAdocao(req, reply) {
       })
     }
 
-    // data atual se não enviada
     historico.tb_historico_adocao_data_adocao = 
       historico.tb_historico_adocao_data_adocao || new Date().toISOString().split('T')[0]
     
@@ -121,7 +119,6 @@ export async function atualizarHistoricoAdocao(req, reply) {
 
     const { id_historico_adocao, tb_historico_adocao_data_adocao, ...dadosParaAtualizar } = historico
 
-    // busca a data antiga caso não venha no body
     const { data: existingData, error: fetchError } = await supabase
       .from('tb_historico_adocao')
       .select('tb_historico_adocao_data_adocao')

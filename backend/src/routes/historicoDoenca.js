@@ -38,7 +38,6 @@ export async function listarHistoricoDoencaPorPet(req, reply) {
 
     if (error) return reply.code(500).send({ success: false, error: error.message })
 
-    // Enriquecer com o nome da doença (tb_doenca_nome)
     const idsDoenca = Array.from(new Set((data || [])
       .map((h) => h?.id_doenca)
       .filter((v) => v !== null && v !== undefined)))
@@ -75,7 +74,6 @@ export async function criarHistoricoDoenca(req, reply) {
       return reply.code(400).send({ success: false, error: "Campos obrigatórios: id_pet, id_doenca" })
     }
 
-    // data atual
     historico.tb_historico_doenca_data_diagnostico = new Date().toISOString().split('T')[0]
 
     const { data, error } = await supabase
@@ -106,7 +104,6 @@ export async function atualizarHistoricoDoenca(req, reply) {
 
     const { id_historico_doenca, tb_historico_doenca_data_diagnostico, ...dadosParaAtualizar } = historico
 
-    // busca a data antiga caso não venha 
     const { data: existingData, error: fetchError } = await supabase
       .from('tb_historico_doenca')
       .select('tb_historico_doenca_data_diagnostico')

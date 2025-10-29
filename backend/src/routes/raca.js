@@ -46,7 +46,7 @@ export async function inativarRaca(req, reply) {
 
   const { data, error } = await supabase
     .from('tb_raca')
-    .update({ tb_raca_inativo: true }) // inativo = true
+    .update({ tb_raca_inativo: true })
     .eq('id_raca', id)
 
   if (error) return reply.code(500).send({ success: false, error: error.message })
