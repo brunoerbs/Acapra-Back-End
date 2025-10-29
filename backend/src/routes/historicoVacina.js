@@ -22,6 +22,50 @@ export async function listarHistoricoVacina(req, reply) {
   }
 }
 
+// GET por id_pet (query)
+export async function listarHistoricoVacinaPorPet(req, reply) {
+  try {
+    const { id_pet } = req.query || {}
+
+    if (!id_pet) {
+      return reply.code(400).send({ success: false, error: "Parâmetro 'id_pet' é obrigatório" })
+    }
+
+    const { data, error } = await supabase
+      .from('tb_his_vacina')
+      .select('*')
+      .eq('id_pet', id_pet)
+
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+
+    // Enriquecer com o nome da vacina (tb_vacina_nome)
+    const idsVacina = Array.from(new Set((data || [])
+      .map((h) => h?.id_vacina)
+      .filter((v) => v !== null && v !== undefined)))
+
+    if (idsVacina.length > 0) {
+      const { data: vacinas, error: vacinaError } = await supabase
+        .from('tb_vacina')
+        .select('id_vacina, tb_vacina_nome')
+        .in('id_vacina', idsVacina)
+
+      if (vacinaError) return reply.code(500).send({ success: false, error: vacinaError.message })
+
+      const vacinaMap = new Map((vacinas || []).map((v) => [v.id_vacina, v.tb_vacina_nome]))
+      const dataComNome = (data || []).map((h) => ({
+        ...h,
+        tb_vacina_nome: vacinaMap.get(h.id_vacina) ?? null,
+      }))
+
+      return { success: true, data: dataComNome }
+    }
+
+    return { success: true, data }
+  } catch (err) {
+    return reply.code(500).send({ success: false, error: err.message })
+  }
+}
+
 // POST
 export async function criarHistoricoVacina(req, reply) {
   try {
