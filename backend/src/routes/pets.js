@@ -87,8 +87,6 @@ export async function listarPets(req, reply) {
         tb_raca_nome_raca: racaMap.get(p.id_raca) ?? null,
       }))
 
-      console.log('dataComRaca', dataComRaca)
-
       return { data: dataComRaca }
     }
 
