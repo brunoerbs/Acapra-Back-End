@@ -166,10 +166,45 @@ export async function atualizarPet(req, reply) {
   const body = req.body ?? {}
 
   if (!body.id_pet) {
-    return reply.code(400).send({ error: "O campo 'id_pet' é obrigatório." });
+    return reply.code(400).send({ error: "O campo 'id_pet' � obrigat�rio." });
   }
 
-  const { tb_foto_pet_url_foto, anexo, foto, id_pet, ...dadosParaAtualizar } = body;
+
+  const { tb_foto_pet_url_foto, anexo, foto, id_pet, id_usuario, ...dadosParaAtualizar } = body;
+
+  let estadoAtualAdotado = null
+  try {
+    const resAtual = await supabase
+      .from('tb_pet')
+      .select('tb_pet_adotado')
+      .eq('id_pet', id_pet)
+      .single()
+    if (resAtual && !resAtual.error) {
+      estadoAtualAdotado = resAtual.data?.tb_pet_adotado ?? null
+    }
+  } catch {}
+
+  const temCampoAdotado = Object.prototype.hasOwnProperty.call(dadosParaAtualizar, 'tb_pet_adotado')
+  let novoAdotado = undefined
+  if (temCampoAdotado) {
+    const v = dadosParaAtualizar.tb_pet_adotado
+    if (typeof v === 'string') {
+      const s = v.trim().toLowerCase()
+      novoAdotado = ['true','1','t','y','yes','sim'].includes(s)
+    } else if (typeof v === 'number') {
+      novoAdotado = v === 1
+    } else {
+      novoAdotado = Boolean(v)
+    }
+    dadosParaAtualizar.tb_pet_adotado = novoAdotado
+  }
+
+  const mudouParaTrue = temCampoAdotado && novoAdotado === true && (estadoAtualAdotado === false || estadoAtualAdotado === null || estadoAtualAdotado === undefined)
+  const mudouParaFalse = temCampoAdotado && novoAdotado === false && estadoAtualAdotado === true
+
+  if (mudouParaFalse) {
+    dadosParaAtualizar.tb_data_adocao = null
+  }
 
   const { data, error } = await supabase
     .from('tb_pet')
@@ -178,6 +213,22 @@ export async function atualizarPet(req, reply) {
     .select();
 
   if (error) return reply.code(500).send({ success: false, error: error.message });
+
+  if (mudouParaTrue) {
+    const hist = {
+      id_pet,
+      ...(id_usuario ? { id_usuario } : {}),
+      tb_historico_adocao_data_adocao: new Date().toISOString().split('T')[0],
+      tb_historico_adocao_inativo: false,
+      tb_historico_adocao_status_adocao: true,
+    }
+    try {
+      await supabase
+        .from('tb_historico_adocao')
+        .insert([hist])
+        .select()
+    } catch {}
+  }
 
   const anexoValor = tb_foto_pet_url_foto ?? foto ?? anexo
   if (anexoValor) {
