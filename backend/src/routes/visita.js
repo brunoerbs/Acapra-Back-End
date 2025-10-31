@@ -23,7 +23,6 @@ export async function retornarVisita(req, reply) {
 export async function criarVisita(req, reply) {
   const visita = {
     ...req.body,
-    // Default para id_usuario deve ser null (não 0)
     id_usuario: (req.body?.id_usuario && Number(req.body.id_usuario) > 0)
       ? Number(req.body.id_usuario)
       : null,

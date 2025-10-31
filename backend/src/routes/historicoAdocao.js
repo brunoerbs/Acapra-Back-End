@@ -22,6 +22,49 @@ export async function listarHistoricoAdocao(req, reply) {
   }
 }
 
+// GET por id_pet (query)
+export async function listarHistoricoAdocaoPorPet(req, reply) {
+  try {
+    const { id_pet } = req.query || {}
+
+    if (!id_pet) {
+      return reply.code(400).send({ success: false, error: "Parâmetro 'id_pet' é obrigatório" })
+    }
+
+    const { data, error } = await supabase
+      .from('tb_historico_adocao')
+      .select('*')
+      .eq('id_pet', id_pet)
+
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+
+    const idsUsuario = Array.from(new Set((data || [])
+      .map((h) => h?.id_usuario)
+      .filter((v) => v !== null && v !== undefined)))
+
+    if (idsUsuario.length > 0) {
+      const { data: usuarios, error: usuarioError } = await supabase
+        .from('tb_usuario')
+        .select('id_usuario, tb_usuario_nome')
+        .in('id_usuario', idsUsuario)
+
+      if (usuarioError) return reply.code(500).send({ success: false, error: usuarioError.message })
+
+      const usuarioMap = new Map((usuarios || []).map((u) => [u.id_usuario, u.tb_usuario_nome]))
+      const dataComNome = (data || []).map((h) => ({
+        ...h,
+        tb_usuario_nome: usuarioMap.get(h.id_usuario) ?? null,
+      }))
+
+      return { success: true, data: dataComNome }
+    }
+
+    return { success: true, data }
+  } catch (err) {
+    return reply.code(500).send({ success: false, error: err.message })
+  }
+}
+
 // POST
 export async function criarHistoricoAdocao(req, reply) {
   try {
@@ -34,7 +77,6 @@ export async function criarHistoricoAdocao(req, reply) {
       })
     }
 
-    // data atual se não enviada
     historico.tb_historico_adocao_data_adocao = 
       historico.tb_historico_adocao_data_adocao || new Date().toISOString().split('T')[0]
     
@@ -77,7 +119,6 @@ export async function atualizarHistoricoAdocao(req, reply) {
 
     const { id_historico_adocao, tb_historico_adocao_data_adocao, ...dadosParaAtualizar } = historico
 
-    // busca a data antiga caso não venha no body
     const { data: existingData, error: fetchError } = await supabase
       .from('tb_historico_adocao')
       .select('tb_historico_adocao_data_adocao')

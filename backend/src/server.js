@@ -13,7 +13,6 @@ import adocaoRoutes from "./routes/adocaoRoutes.js"
 
 const app = Fastify()
 
-// Habilita CORS para qualquer origem
 app.register(cors, {
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],

@@ -22,6 +22,49 @@ export async function listarHistoricoDoenca(req, reply) {
   }
 }
 
+// GET por id_pet (query)
+export async function listarHistoricoDoencaPorPet(req, reply) {
+  try {
+    const { id_pet } = req.query || {}
+
+    if (!id_pet) {
+      return reply.code(400).send({ success: false, error: "Parâmetro 'id_pet' é obrigatório" })
+    }
+
+    const { data, error } = await supabase
+      .from('tb_historico_doenca')
+      .select('*')
+      .eq('id_pet', id_pet)
+
+    if (error) return reply.code(500).send({ success: false, error: error.message })
+
+    const idsDoenca = Array.from(new Set((data || [])
+      .map((h) => h?.id_doenca)
+      .filter((v) => v !== null && v !== undefined)))
+
+    if (idsDoenca.length > 0) {
+      const { data: doencas, error: doencaError } = await supabase
+        .from('tb_doenca')
+        .select('id_doenca, tb_doenca_nome')
+        .in('id_doenca', idsDoenca)
+
+      if (doencaError) return reply.code(500).send({ success: false, error: doencaError.message })
+
+      const doencaMap = new Map((doencas || []).map((d) => [d.id_doenca, d.tb_doenca_nome]))
+      const dataComNome = (data || []).map((h) => ({
+        ...h,
+        tb_doenca_nome: doencaMap.get(h.id_doenca) ?? null,
+      }))
+
+      return { success: true, data: dataComNome }
+    }
+
+    return { success: true, data }
+  } catch (err) {
+    return reply.code(500).send({ success: false, error: err.message })
+  }
+}
+
 // POST
 export async function criarHistoricoDoenca(req, reply) {
   try {
@@ -31,7 +74,6 @@ export async function criarHistoricoDoenca(req, reply) {
       return reply.code(400).send({ success: false, error: "Campos obrigatórios: id_pet, id_doenca" })
     }
 
-    // data atual
     historico.tb_historico_doenca_data_diagnostico = new Date().toISOString().split('T')[0]
 
     const { data, error } = await supabase
@@ -62,7 +104,6 @@ export async function atualizarHistoricoDoenca(req, reply) {
 
     const { id_historico_doenca, tb_historico_doenca_data_diagnostico, ...dadosParaAtualizar } = historico
 
-    // busca a data antiga caso não venha 
     const { data: existingData, error: fetchError } = await supabase
       .from('tb_historico_doenca')
       .select('tb_historico_doenca_data_diagnostico')
